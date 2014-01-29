@@ -10,5 +10,4 @@ from vectorutil import linear_comb
 def GF2_span(labels, veclist):
     """ Returns the set of all linear combinations of the vectors in vectorset."""
     span = {}
-    for j in labels:
-        span.add(linear_comb(
+    # endeavoring to use a comprehension within a loop
