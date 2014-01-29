@@ -29,9 +29,7 @@ class Matrix:
     def __getitem__(self,k):
         return 0 if k not in self.f else self.f[k]
         
-    def __setitem__(self, k, val):
-    
-        self.f[k] = val
+    def __setitem__(self, k, val): self.f[k] = val
 
     def transpose(self):
         return NotImplementedError
@@ -57,7 +55,7 @@ class Matrix:
             return result_vector
         else:
             # scalar-matrix
-            result_matrix = Matrix( (self.D[0], self.D[1]), {})
+            result_matrix = Matrix((self.D[0], self.D[1]), {})
             for (i, j) in self.f.keys():
                 result_matrix[i,j] += self[i, j] * other
             return result_matrix
@@ -67,12 +65,8 @@ class Matrix:
     def __rmul__(self, other):
         if Vector == type(other): # vector-matrix
             assert other.D == self.D[0]
-            #result_vector = Vector(other.D, {})
-            #for (i, j) in self.f.keys():
-            #        result_vector[i] += self[i,j] * other[i]
-
-            result_vector = Vector(other.D, { c : self[r, c] * other[c]
-                                              for (r, c) in self.f.keys() })
+            result_vector = Vector(other.D, {c : self[r, c] * other[c]
+                                             for (r, c) in self.f.keys()})
                     
             return result_vector
         else:  # Assume scalar
