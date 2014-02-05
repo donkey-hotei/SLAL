@@ -9,6 +9,8 @@ UN_file = open('UN_voting_data.txt')
 US_voting_data = [ ]
 UN_voting_data = [ ]
 
+
+# These two while loops make the program run very slow initially....
 while 1:
     line = US_file.readline()
     if not line:
@@ -25,9 +27,9 @@ while 1:
 US_voting_dict = { data[0]: list2vector([int(i) for i in data[3:]])
                    for data in US_voting_data }
 
-p ={ data[0] : (data[1],data[2]) for data in US_voting_data }
-democrats = [ senator for senator in p.keys() if p[senator][0] == 'D' ]
-republicans = [ senator for senator in p.keys() if p[senator][0] == 'R' ]
+p = { data[0] : (data[1],data[2]) for data in US_voting_data }
+democrats = [ senator for senator in p.keys() if p[senator][0] == 'D' ] # filter our democrats
+republicans = [ senator for senator in p.keys() if p[senator][0] == 'R' ] # filter out republicans...
 
 UN_voting_dict = { data[0]: list2vector([int(i) for i in data[3:]])
                    for data in UN_voting_data }
