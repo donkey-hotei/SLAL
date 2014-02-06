@@ -78,15 +78,13 @@ class Matrix:
 
     # addition of matrices was easy enough
     def __add__(self, other):
-        if type(other) == Matrix:
-            assert self.D[1] == other.D[1] 
-            result_matrix = Matrix( (self.D[0], self.D[1]),
-                                    { (r, c) : self[r, c] + other[r, c]
-                                    for r in self.D[0] for c in self.D[1]})
-            return result_matrix
-        else:
-            return TypeError("Can only add matrix with another matrix.")
-
+        assert type(other) == Matrix:
+        assert self.D[1] == other.D[1] 
+        result_matrix = Matrix((self.D[0], self.D[1]),
+                               {(r, c) : self[r, c] + other[r, c]
+                               for r in self.D[0] for c in self.D[1]})
+        return result_matrix
+        
     def __sub__(a,b):
         return a+(-b)
 
