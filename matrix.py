@@ -34,7 +34,8 @@ class Matrix:
         self.f[k] = val
 
     def transpose(self):
-        return NotImplementedError
+        return Matrix((self.D[1], self.D[0]),
+                    {c : r for (r, c) in self.f.keys()}) 
 
     def __neg__(self):
         return (-1)*self
@@ -51,11 +52,11 @@ class Matrix:
 
         elif Vector == type(other): # matrix-vector
             assert other.D == self.D[1]
-            result_vector = Vector( other.D, {})
+            result_vector = Vector( self.D[0], {})
             for (i, j) in self.f.keys():
                 result_vector[j] += self[i,j] * other[j]
             return result_vector
-        else:
+        elif int == type(other) or float == type(other):
             # scalar-matrix
             result_matrix = Matrix( (self.D[0], self.D[1]), {})
             for (i, j) in self.f.keys():
