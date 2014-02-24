@@ -27,8 +27,12 @@ def runVectorTests():
     print("Testing scalar multiplcation ... ", end = '')
     print(tst(2 * v == Vector({'a','b','c','d'}, {'a': 4, 'b':8, 'c':12, 'd':16})))
 
-    # test for __mul__
-    # what is the difference between one vecvtor and another ??? 
+    
+def runMatrixTest():
+    return NotImplementedError
+    
+    
+
 if __name__ == '__main__':
     runVectorTests()
     

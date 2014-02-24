@@ -29,9 +29,7 @@ class Matrix:
     def __getitem__(self,k):
         return 0 if k not in self.f else self.f[k]
         
-    def __setitem__(self, k, val):
-    
-        self.f[k] = val
+    def __setitem__(self, k, val): self.f[k] = val
 
     def transpose(self):
         return Matrix((self.D[1], self.D[0]),
@@ -58,7 +56,7 @@ class Matrix:
             return result_vector
         elif int == type(other) or float == type(other):
             # scalar-matrix
-            result_matrix = Matrix( (self.D[0], self.D[1]), {})
+            result_matrix = Matrix((self.D[0], self.D[1]), {})
             for (i, j) in self.f.keys():
                 result_matrix[i,j] += self[i, j] * other
             return result_matrix
@@ -68,12 +66,8 @@ class Matrix:
     def __rmul__(self, other):
         if Vector == type(other): # vector-matrix
             assert other.D == self.D[0]
-            #result_vector = Vector(other.D, {})
-            #for (i, j) in self.f.keys():
-            #        result_vector[i] += self[i,j] * other[i]
-
-            result_vector = Vector(other.D, { c : self[r, c] * other[c]
-                                              for (r, c) in self.f.keys() })
+            result_vector = Vector(other.D, {c : self[r, c] * other[c]
+                                             for (r, c) in self.f.keys()})
                     
             return result_vector
         else:  # Assume scalar
@@ -85,15 +79,13 @@ class Matrix:
 
     # addition of matrices was easy enough
     def __add__(self, other):
-        if type(other) == Matrix:
-            assert self.D[1] == other.D[1] 
-            result_matrix = Matrix( (self.D[0], self.D[1]),
-                                    { (r, c) : self[r, c] + other[r, c]
-                                    for r in self.D[0] for c in self.D[1]})
-            return result_matrix
-        else:
-            return TypeError("Can only add matrix with another matrix.")
-
+        assert type(other) == Matrix:
+        assert self.D[1] == other.D[1] 
+        result_matrix = Matrix((self.D[0], self.D[1]),
+                               {(r, c) : self[r, c] + other[r, c]
+                               for r in self.D[0] for c in self.D[1]})
+        return result_matrix
+        
     def __sub__(a,b):
         return a+(-b)
 
