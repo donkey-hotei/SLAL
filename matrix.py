@@ -79,7 +79,7 @@ class Matrix:
 
     # addition of matrices was easy enough
     def __add__(self, other):
-        assert type(other) == Matrix:
+        assert type(other) == Matrix
         assert self.D[1] == other.D[1] 
         result_matrix = Matrix((self.D[0], self.D[1]),
                                {(r, c) : self[r, c] + other[r, c]
