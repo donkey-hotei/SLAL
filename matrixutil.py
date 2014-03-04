@@ -37,7 +37,7 @@ def value(d):
   """
   return next(iter(d.values())) if isinstance(d, dict) else d[0]
 
-def mat2rowdict(A):
+def matrix2rowdict(A):
   """Given a matrix, return a dictionary mapping row labels of A to rows of A
      e.g.:
      
@@ -49,7 +49,7 @@ def mat2rowdict(A):
      """
   return {row:Vector(A.D[1], {col:A[row,col] for col in A.D[1]}) for row in A.D[0]}
 
-def mat2coldict(A):
+def matrix2coldict(A):
   """Given a matrix, return a dictionary mapping column labels of A to columns of A
      e.g.:
      >>> M = Mat(({0, 1, 2}, {0, 1}), {(0, 1): 1, (2, 0): 8, (1, 0): 4, (0, 0): 3, (2, 1): -2})
@@ -82,7 +82,7 @@ def coldict2mat(coldict):
     row_labels = value(coldict).D
     return Matrix((row_labels, set(keys(coldict))), {(r,c):coldict[c][r] for c in keys(coldict) for r in row_labels})
 
-def rowdict2mat(rowdict):
+def rowdict2matrix(rowdict):
     """
     Given a dictionary or list whose values are Vecs, returns the Mat having these
     Vecs as its rows.  This is the inverse of mat2rowdict.
@@ -104,7 +104,7 @@ def rowdict2mat(rowdict):
     col_labels = value(rowdict).D
     return Matrix((set(keys(rowdict)), col_labels), {(r,c):rowdict[r][c] for r in keys(rowdict) for c in col_labels})
 
-def listlist2mat(L):
+def listlist2matrix(L):
   """Given a list of lists of field elements, return a matrix whose ith row consists
   of the elements of the ith list.  The row-labels are {0...len(L)}, and the
   column-labels are {0...len(L[0])}
