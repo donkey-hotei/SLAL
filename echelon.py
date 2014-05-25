@@ -81,8 +81,8 @@ if __name__ == '__main__':
 	from vectorutil import list2vector
 	from matrixutil import listlist2matrix, matrix2rowdict, coldict2matrix, identity
 	A = listlist2matrix([[2, 0, 9],
-						 [1, 2, 2],
-						 [3, 5, 3]])
+			     [1, 2, 2],
+			     [3, 5, 3]])
 	print(A)
 	print(matrix2rowdict(A))
 	for v in matrix2rowdict(A).keys():
