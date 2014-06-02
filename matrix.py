@@ -54,7 +54,8 @@ class Matrix:
             for (i, j) in self.f.keys():
                 result_vector[j] += self[i,j] * other[j]
             return result_vector
-        elif int == type(other) or float == type(other):
+  
+        elif type(other) == int or type(other) == float:
             # scalar-matrix
             result_matrix = Matrix((self.D[0], self.D[1]), {})
             for (i, j) in self.f.keys():
