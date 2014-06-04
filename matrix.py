@@ -38,7 +38,7 @@ class Matrix:
     def __neg__(self):
         return (-1)*self
 
-    
+    # There's something up with the polymorhphism here...
     def __mul__(self,other):
         if Matrix == type(other): # matrix-matrix
             assert self.D[1] == other.D[0]
@@ -48,6 +48,7 @@ class Matrix:
                     result_matrix[r,c] = sum([self[r,k] * other[k,c] for k in other.D[1]])
             return result_matrix
 
+        # for some reason matrix-vector multiplication yields type None
         elif Vector == type(other): # matrix-vector
             assert other.D == self.D[1]
             result_vector = Vector( self.D[0], {})
