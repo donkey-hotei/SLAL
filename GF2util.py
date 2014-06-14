@@ -12,5 +12,7 @@ def GF2_span(labels, veclist):
     """ Returns the set of all linear combinations of the vectors in vectorset."""
     span = {}
     for d in labels:
-        span = { veclist[d] * veclist[d+1] 
-                 for vector in veclist }
+        span = { veclist[d] * veclist[d+1] for vector in veclist }
+    return span
+    
+# This is still wrong.
