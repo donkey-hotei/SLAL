@@ -45,7 +45,7 @@ def rref(A):
 	return new_A
 
 
-def row_reduce(rowlist):
+def row_reduce(rowlist:list)->list:
 	"""
 	Given a list of vectors, transforms the vectors, 
 	Mutates the arguement. 
