@@ -1,6 +1,6 @@
 """
 Implementation of Gaussian Elimination for SLAL
-by dysnsne
+by dynsne
 
 
 thanks to http://elonen.iki.fi/code/misc-notes/python-gaussj/ 
