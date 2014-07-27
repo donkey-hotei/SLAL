@@ -11,8 +11,11 @@ from GF2 import zero, one
 
 def GF2_span(veclist:list)->set:
     """ Returns the set of all linear combinations of the vectors in vectorset."""
-    possible_coeffs = powerset
+    possible_coeffs = powerset(
+    span = set()
     for coeffs in possible_coeffs:
+        span.add(linear_comb(coeffs, veclist))
+    return span
     
 def linear_comb(clist:list, vlist:list)->Vector:
     """
