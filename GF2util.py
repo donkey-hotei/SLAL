@@ -10,7 +10,7 @@ from GF2 import zero, one
 
 
 def GF2_span(veclist:list)->set:
-    """ Returns the set of all linear combinations of the vectors in vectorset."""
+    """ Returns the set of all linear combinations of the vectors in a vectorset."""
     possible_coeffs = powerset(
     span = set()
     for coeffs in possible_coeffs:
