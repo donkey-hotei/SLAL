@@ -1,5 +1,27 @@
-The Sparse Linear Algebra Library (SLAL) was developed not to be a full fledged 
-module to be used in actual scientific work but as a tool for students to learn
-linear algebra and programming side by side using Python. 
-With this, there are some iPython notebooks which demonstrate the applications
-of linear algebra in computer science. 
+Sparse Linear Algebra Library
+A simple library for exploring problems in linear algebra written in pure-python.
+To try it out just clone the 
+
+Matrix-Vector Multiplication 
+```python
+from matrix import Matrix
+from vector import Vector
+from matrixutil import listlist2matrix
+from vectorutil import list2vector
+
+>>> M = listlist2vector([[ 1, 1 ],
+                         [ 2, 3]])
+>>> v = list2vector([1, 2])
+
+>>> print(M)
+       0 1
+     -----
+ 0  |  1 1
+ 1  |  2 3
+
+>>> print(v)
+ 0 1
+----
+ 1 2
+
+```
