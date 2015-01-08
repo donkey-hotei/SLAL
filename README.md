@@ -9,7 +9,7 @@ from vector import Vector
 from matrixutil import listlist2matrix
 from vectorutil import list2vector
 
->>> M = listlist2vector([[ 1, 1 ],
+>>> M = listlist2matrix([[ 1, 1 ],
                          [ 2, 3]])
 >>> v = list2vector([1, 2])
 
