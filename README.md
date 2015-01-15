@@ -1,5 +1,6 @@
 Sparse Linear Algebra Library
 A simple library written in pure-python for exploring problems in linear algebra.
+Runs only in Python3, not currently backwards compatatible. 
 
 
 Matrix-Vector Multiplication 
