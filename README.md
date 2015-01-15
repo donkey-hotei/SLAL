@@ -5,10 +5,10 @@ Runs only in Python3, not currently backwards compatatible.
 
 Matrix-Vector Multiplication 
 ```python
-from matrix import Matrix
-from vector import Vector
-from matrixutil import listlist2matrix
-from vectorutil import list2vector
+from SLAL.core.matrix import Matrix
+from SLAL.core.vector import Vector
+from SLAL.utils.matrixutil import listlist2matrix
+from SLAL.utils.vectorutil import list2vector
 
 >>> M = listlist2matrix([[ 1, 1 ],
                          [ 2, 3]])
