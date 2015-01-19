@@ -1,4 +1,4 @@
-# Copyright 2013 Philip N. Klein
+
 from vec import Vec
 from matutil import rowdict2mat
 
