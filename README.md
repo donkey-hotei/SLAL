@@ -2,6 +2,7 @@ Sparse Linear Algebra Library
 A simple library written in pure-python for exploring problems in linear algebra.
 Runs only in Python3, not currently backwards compatatible. 
 
+Tutorials in the works...
 
 Matrix-Vector Multiplication 
 ```python
@@ -24,5 +25,9 @@ from SLAL.utils.vectorutil import list2vector
  0 1
 ----
  1 2
+ 
+ >> print(M * v)
+ 
+
 
 ```
