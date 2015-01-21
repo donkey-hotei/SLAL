@@ -1,8 +1,16 @@
 Sparse Linear Algebra Library
 A simple library written in pure-python for exploring problems in linear algebra.
-Runs only in Python3, not currently backwards compatatible. 
+This library is meant for educational purposes only, and the poor developer who created
+this software is not responsible for any engineering mishaps that occur due to the use
+of this library. 
 
-Tutorials in the works...
+Library is only compatible with Python3 or greater, not currently backwards compatatible. 
+
+Tutorials are currently in the works.
+
+TODO: 
+	- Implement Gaussian Elimination 
+	- Finish up Threshold secret sharing notebook
 
 Matrix-Vector Multiplication 
 ```python
@@ -11,17 +19,17 @@ from SLAL.core.vector import Vector
 from SLAL.utils.matrixutil import listlist2matrix
 from SLAL.utils.vectorutil import list2vector
 
->>> M = listlist2matrix([[ 1, 1 ],
+>>> A = listlist2matrix([[ 1, 1 ],
                          [ 2, 3]])
->>> v = list2vector([1, 2])
+>>> x = list2vector([1, 2])
 
->>> print(M)
+>>> print(A)
        0 1
      -----
  0  |  1 1
  1  |  2 3
 
->>> print(v)
+>>> print(x)
  0 1
 ----
  1 2

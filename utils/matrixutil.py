@@ -5,8 +5,8 @@ by dysne
 
 Matrix utility functions.
 """
-from vector import Vector
-from matrix import Matrix
+from core.vector import Vector
+from core.matrix import Matrix
 
 def efficient_rowdict2mat(rowdict):
   col_labels = value(rowdict).D

@@ -11,7 +11,7 @@ SLAL: Sparse Linear Algebra Library
 (c)opyleft : free software
 dynsne 
 """
-from vector import Vector
+from core.vector import Vector 
 
 class Matrix:
     """

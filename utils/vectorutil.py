@@ -3,7 +3,7 @@ SLAL: Vector Utility Functions
 by dysnsne
 (c)opyleft
 """
-from vector import Vector
+from core.vector import Vector
 
 # utility functions for vectors 
 def list2vector(L):
