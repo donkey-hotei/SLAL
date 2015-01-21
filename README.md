@@ -35,7 +35,9 @@ from SLAL.utils.vectorutil import list2vector
  1 2
  
  >> print(M * v)
- 
+ 0 1
+----
+ 3 8  
 
 
 ```
