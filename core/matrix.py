@@ -49,7 +49,7 @@ class Matrix:
 
         # for some reason matrix-vector multiplication yields type None
         elif Vector == type(other): # matrix-vector
-            assert other.D == self.D[1]
+            assert other.D == self.D[1] 
             result_vector = Vector( self.D[0], {})
             for (i, j) in self.f.keys():
                 result_vector[j] += self[i,j] * other[j]
@@ -92,6 +92,13 @@ class Matrix:
 
     def __eq__(self, other):
         return NotImplementedError
+
+    def __pow__(self, power):
+        """ Matrix exponentation """
+        result_matrix = self
+        for _ in range(power):
+            result_matrix.__mul__(self)
+        return result_matrix
 
     def copy(self):
         return Mat(self.D, self.f.copy())
