@@ -91,8 +91,9 @@ class Matrix:
         return a+(-b)
 
     def __eq__(self, other):
-        return NotImplementedError
-
+        assert self.D == other.D
+        return all([self[r,c] == other[r,c] for r,c in zip(self.D[0],self.D[1])])
+    
     def __pow__(self, power):
         """ Matrix exponentation """
         result_matrix = self
