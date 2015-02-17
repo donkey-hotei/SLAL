@@ -1,12 +1,25 @@
+#!/usr/bin/python
+from orthogonalization import orthogonalize 
+
+"""
+module for creating orthonormal basis for 
+some given matrix A 
+
+It is convienant to deal with orthonormal 
+Vectortors which have been normalized to length one.
+Computationally more feasable. 
+"""
+
+
 def orthonormalize(L):
     '''
-    Input: a list L of linearly independent Vecs
-    Output: A list T of orthonormal Vecs such that for all i in [1, len(L)],
+    Input: a list L of linearly independent Vectors
+    Output: A list T of orthonormal Vectors such that for all i in [1, len(L)],
             Span L[:i] == Span T[:i]
 
-    >>> from vec import Vec
+    >>> from Vector import Vector
     >>> D = {'a','b','c','d'}
-    >>> L = [Vec(D, {'a':4,'b':3,'c':1,'d':2}), Vec(D, {'a':8,'b':9,'c':-5,'d':-5}), Vec(D, {'a':10,'b':1,'c':-1,'d':5})]
+    >>> L = [Vector(D, {'a':4,'b':3,'c':1,'d':2}), Vector(D, {'a':8,'b':9,'c':-5,'d':-5}), Vector(D, {'a':10,'b':1,'c':-1,'d':5})]
     >>> for v in orthonormalize(L): print(v)
     ... 
     <BLANKLINE>
@@ -28,15 +41,15 @@ def orthonormalize(L):
 def aug_orthonormalize(L):
     '''
     Input:
-        - L: a list of Vecs
+        - L: a list of Vectors
     Output:
         - A pair Qlist, Rlist such that:
             * coldict2mat(L) == coldict2mat(Qlist) * coldict2mat(Rlist)
             * Qlist = orthonormalize(L)
 
-    >>> from vec import Vec
+    >>> from Vector import Vector
     >>> D={'a','b','c','d'}
-    >>> L = [Vec(D, {'a':4,'b':3,'c':1,'d':2}), Vec(D, {'a':8,'b':9,'c':-5,'d':-5}), Vec(D, {'a':10,'b':1,'c':-1,'d':5})]
+    >>> L = [Vector(D, {'a':4,'b':3,'c':1,'d':2}), Vector(D, {'a':8,'b':9,'c':-5,'d':-5}), Vector(D, {'a':10,'b':1,'c':-1,'d':5})]
     >>> Qlist, Rlist = aug_orthonormalize(L)
     >>> from matutil import coldict2mat
     >>> print(coldict2mat(Qlist))
