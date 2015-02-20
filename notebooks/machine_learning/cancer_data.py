@@ -1,15 +1,13 @@
-
-from vec import Vec
-from matutil import rowdict2mat
+from core.vector import Vector 
 
 def read_training_data(fname, D=None):
     """Given a file in appropriate format, and given a set D of features,
     returns the pair (A, b) consisting of 
-    a P-by-D matrix A and a P-vector b,
+    a P-by-D matrix A and a P-Vectortor b,
     where P is a set of patient identification integers (IDs).
 
     For each patient ID p,
-      - row p of A is the D-vector describing patient p's tissue sample,
+      - row p of A is the D-Vectortor describing patient p's tissue sample,
       - entry p of b is +1 if patient p's tissue is malignant, and -1 if it is benign.
 
     The set D of features must be a subset of the features in the data (see text).
@@ -26,7 +24,7 @@ def read_training_data(fname, D=None):
         row = line.split(",")
         patient_ID = int(row[0])
         patient_diagnoses[patient_ID] = -1 if row[1]=='B' else +1
-        feature_vectors[patient_ID] = Vec(D, {f:float(row[feature_map[f]+2]) for f in D})
-    return rowdict2mat(feature_vectors), Vec(set(patient_diagnoses.keys()), patient_diagnoses)
+        feature_vectors[patient_ID] = Vector(D, {f:float(row[feature_map[f]+2]) for f in D})
+    return rowdict2mat(feature_vector), Vector(set(patient_diagnoses.keys()), patient_diagnoses)
 
 
