@@ -4,7 +4,7 @@ Row Reduce Echelon Form
 thanks to http://elonen.iki.fi/code/misc-notes/python-gaussj/ 
 for the simple algorithm used in the guass_jordan function
 """
-
+from matrixutil import matrix2rowdict, identity, coldict2matrix
 
 # First Attempts at implementing row reduction
 def rref(A):
@@ -43,7 +43,7 @@ def rref(A):
 	return new_A
 
 
-def row_reduce(rowlist:list)->list:
+def row_reduce(rowlist):
 	"""
 	Given a list of vectors, transforms the vectors, 
 	Mutates the arguement. 
@@ -72,7 +72,7 @@ def guass_jordan(m, epsilon = 1.0/(10**10)):
 	Puts the matrix into the Reduced Row Echelon Form.
 	Returns True if sucessful, False if the matrix is singular.
 	"""
-	pass
+	return NotImplementedError 
 
 
 if __name__ == '__main__':

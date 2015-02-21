@@ -60,7 +60,7 @@ def matrix2coldict(A):
   """
   return {col:Vector(A.D[0], {row:A[row,col] for row in A.D[0]}) for col in A.D[1]}
 
-def coldict2mat(coldict):
+def coldict2matrix(coldict):
     """
     Given a dictionary or list whose values are Vecs, returns the Mat having these
     Vecs as its columns.  This is the inverse of mat2coldict.

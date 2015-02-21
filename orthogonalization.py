@@ -1,11 +1,10 @@
 from core.vector import Vector
 
 """
-Here we're using the Gram-Smidt process of
-orthogonalization. Which uses project to 
+The Gram-Smidt process of
+orthogonalization. Which uses projection to 
 find a set a of orthogonal vectors. 
 """
-
 
 def project_along(b, v, eps = 1E-20):
     '''
