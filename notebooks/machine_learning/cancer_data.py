@@ -1,4 +1,7 @@
-from core.vector import Vector 
+import sys
+sys.path.append('../../'    )
+from core.vector import Vector
+from util.matrixutil import rowdict2matrix 
 
 def read_training_data(fname, D=None):
     """Given a file in appropriate format, and given a set D of features,
@@ -25,6 +28,6 @@ def read_training_data(fname, D=None):
         patient_ID = int(row[0])
         patient_diagnoses[patient_ID] = -1 if row[1]=='B' else +1
         feature_vectors[patient_ID] = Vector(D, {f:float(row[feature_map[f]+2]) for f in D})
-    return rowdict2mat(feature_vector), Vector(set(patient_diagnoses.keys()), patient_diagnoses)
+    return rowdict2matrix(feature_vectors), Vector(set(patient_diagnoses.keys()), patient_diagnoses)
 
 
