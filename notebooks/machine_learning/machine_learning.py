@@ -26,15 +26,16 @@ def signum(u):
 	return v 
 
 def fraction_wrong(A, b, w):
- 	"""
-	Input:	 
-        - A: a Mat with rows as feature vectors
-        - b: a Vec of actual diagnoses
-        - w: hypothesis Vec
-	Output:
-        - Fraction (as a decimal in [0,1]) of vectors incorrectly classified by w
 	"""
-	return signum(A*w) * b 
+	Input:
+		- A : a matrix with rows as features
+		- b : a vector of actual diagnoses
+		- w : hypothesis vector 
+
+	Output:
+		- fraction of vectors incorrectly classfied (decimal between [0,1])
+	"""
+	return signum(A*w)*b 
 
 
 def loss(A, b, w):
@@ -76,5 +77,6 @@ def gradient_descent_step(A, b, w, sigma):
 	return NotImplementedError
 
 if __name__ == '__main__':
+	# tests 
 	print(signum(Vector({1,2,3},{1:2, 2:-1})) == Vector({1,2,3},{1:1,2:-1,3:1}))
 

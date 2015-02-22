@@ -1,15 +1,9 @@
 """
-
  ___  __      __    __   
 / __)(  )    /__\  (  )  
 \__ \ )(__  /(__)\  )(__ 
 (___/(____)(__)(__)(____)
-
-
-
-SLAL: Sparse Linear Algebra Library
-(c)opyleft : free software
-dynsne 
+Sparse Linear Algebra Library
 """
 from core.vector import Vector 
 

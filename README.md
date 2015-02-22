@@ -1,3 +1,8 @@
+ ___  __      __    __   
+/ __)(  )    /__\  (  )  
+\__ \ )(__  /(__)\  )(__ 
+(___/(____)(__)(__)(____)
+
 Sparse Linear Algebra Library
 A simple library written in pure-python for exploring problems in linear algebra.
 This library is meant for educational purposes only, and the poor developer who created
