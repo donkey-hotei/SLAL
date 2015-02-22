@@ -4,8 +4,8 @@
 \__ \ )(__  /(__)\  )(__ 
 (___/(____)(__)(__)(____)
 ```
-Sparse Linear Algebra Library
-A simple library written in pure-python for exploring problems in linear algebra.
+Sparse Linear Algebra Library is
+a simple library written in pure-python for exploring problems in linear algebra.
 This library is meant for educational purposes only, and the poor developer who created
 this software is not responsible for any engineering mishaps that occur due to the use
 of this library. 
