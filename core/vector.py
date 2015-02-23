@@ -1,9 +1,9 @@
 """
-SLAL: Sparse Linear Algebra Library
-written by Isik Dynsne
-As an independent study project advised by Paul Smith @ SPSCC 2014
-
-(c)opyleft
+ ___  __      __    __   
+/ __)(  )    /__\  (  )  
+\__ \ )(__  /(__)\  )(__ 
+(___/(____)(__)(__)(____)
+Sparse Linear Algebra Library
 """
 import math
 
@@ -22,8 +22,6 @@ class Vector:
     def __getitem__(self, d): 
         """ Return the value of entry d in v. """
         return self.f[d] if d in self.f else 0
-
-
 
     def __setitem__(self, k, val):
         """ Setting the element v with label d to be val """
@@ -73,6 +71,12 @@ class Vector:
         # this is clearly a recursive cal
         return [ self[e] for e in self.D ] == [ other[e] for e in other.D ]
         
+    def __pow__(self, exponent):
+        result = self
+        for _ in range(exponent):
+            result *= result
+        return result 
+
     def __str__(v):
         "pretty-printing"
         D_list = sorted(v.D, key=repr) # sort the domain into a list
@@ -103,7 +107,6 @@ class Vector:
         """  Euclidean length of vector """
         return math.sqrt(sum(Vector(self.D, {i : self[i]*self[i] for i in self.D})))
         
-
 
 
 

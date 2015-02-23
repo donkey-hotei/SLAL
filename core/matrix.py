@@ -26,12 +26,16 @@ class Matrix:
     def __setitem__(self, k, val): self.f[k] = val
 
     def transpose(self):
-        return Matrix((self.D[1], self.D[0]), {c : r for (r, c) in self.f.keys()}) 
+        """ Returns transpose of Matrix """
+        result = Matrix((self.D[1],self.D[0]), {})
+        for i in self.D[0]:
+            for j in self.D[1]:
+                result[j, i] = self[i,j]
+        return result 
 
     def __neg__(self):
         return (-1)*self
 
-    # There's something up with the polymorhphism here...
     def __mul__(self,other):
         if Matrix == type(other): # matrix-matrix
             assert self.D[1] == other.D[0]
@@ -41,13 +45,9 @@ class Matrix:
                     result_matrix[r,c] = sum([self[r,k] * other[k,c] for k in other.D[1]])
             return result_matrix
 
-        # for some reason matrix-vector multiplication yields type None
         elif Vector == type(other): # matrix-vector
             assert other.D == self.D[1] 
-            result_vector = Vector( self.D[0], {})
-            for (i, j) in self.f.keys():
-                result_vector[j] += self[i,j] * other[j]
-            return result_vector
+            return Vector(self.D[0],{r:sum(self[r,c] * other[c] for c in self.D[1]) for r in self.D[0]})
   
         elif type(other) == int or type(other) == float:
             # scalar-matrix
@@ -56,20 +56,13 @@ class Matrix:
                 result_matrix[i,j] += self[i, j] * other
             return result_matrix
                         
-        #this will only be used if other is scalar (or not-supported). matrix and vector both have __mul__ implemented
-
     def __rmul__(self, other):
         if Vector == type(other): # vector-matrix
             assert other.D == self.D[0]
-            result_vector = Vector(other.D, {c : self[r, c] * other[c]
-                                             for (r, c) in self.f.keys()})
-                    
-            return result_vector
+            return Vector(self.D[1],{c:sum(self[r,c]*other[r] for r in self.D[0]) for c in self.D[1]})
+
         else:  # Assume scalar
-            result_matrix = Matrix( (self.D[0], self.D[1]),
-                                    {(r, c) : other*self[r,c]
-                                    for (r, c) in self.f.keys() } )
-            return result_matrix
+            return Matrix((self.D[0], self.D[1]), {(r, c) : other*self[r,c] for (r, c) in self.f.keys() } )
 
 
     # addition of matrices was easy enough

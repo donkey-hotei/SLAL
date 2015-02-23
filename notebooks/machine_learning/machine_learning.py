@@ -35,8 +35,8 @@ def fraction_wrong(A, b, w):
 	Output:
 		- fraction of vectors incorrectly classfied (decimal between [0,1])
 	"""
-	return signum(A*w)*b 
-
+	b1 = signum(A*w)
+	return NotImplementedError
 
 def loss(A, b, w):
 	"""
@@ -77,6 +77,7 @@ def gradient_descent_step(A, b, w, sigma):
 	return NotImplementedError
 
 if __name__ == '__main__':
-	# tests 
-	print(signum(Vector({1,2,3},{1:2, 2:-1})) == Vector({1,2,3},{1:1,2:-1,3:1}))
-
+	import random 
+	A, b = read_training_data('train.data')
+	w = Vector(A.D[1], {k : random.choice([1,-1]) for k in A.D[1]})
+	print(A * w)
