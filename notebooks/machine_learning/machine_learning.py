@@ -83,3 +83,5 @@ if __name__ == '__main__':
 	A, b = read_training_data('train.data')
 	w = Vector(A.D[1], {k : random.choice([1,-1]) for k in A.D[1]})
 	print(fraction_wrong(A, b, w))
+	print('\n')
+	print(find_gradient(A, b, w))

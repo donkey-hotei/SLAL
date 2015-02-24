@@ -60,12 +60,10 @@ class Matrix:
         if Vector == type(other): # vector-matrix
             assert other.D == self.D[0]
             return Vector(self.D[1],{c:sum(self[r,c]*other[r] for r in self.D[0]) for c in self.D[1]})
-
-        else:  # Assume scalar
+            
+        else: # otherwise we assume other is a scalar 
             return Matrix((self.D[0], self.D[1]), {(r, c) : other*self[r,c] for (r, c) in self.f.keys() } )
 
-
-    # addition of matrices was easy enough
     def __add__(self, other):
         assert type(other) == Matrix
         assert self.D[1] == other.D[1] 
