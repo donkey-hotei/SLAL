@@ -23,7 +23,7 @@ def signum(u):
 	for e in u.D:
 		if u[e] >= 0: v[e] = 1
 		else: v[e] = -1
-	return v 
+	return v
 
 def fraction_wrong(A, b, w):
 	"""
@@ -35,8 +35,8 @@ def fraction_wrong(A, b, w):
 	Output:
 		- fraction of vectors incorrectly classfied (decimal between [0,1])
 	"""
-	b1 = signum(A*w)
-	return NotImplementedError
+	sigma = signum(A*w)
+	return abs(sigma*b) / len(b.D)  
 
 def loss(A, b, w):
 	"""
@@ -48,7 +48,7 @@ def loss(A, b, w):
 	Output:
 		- Value of loss function at w for traning data 
 	"""
-	return NotImplementedError
+	return (A*w - b)**2 
 
 def find_gradient(A, b, w):
 	"""
@@ -60,7 +60,7 @@ def find_gradient(A, b, w):
 	Output:
 		- value of gradient at w 
 	"""
-	return NotImplementedError
+	return 2 * (A*w - b) # this doesn't return a single valuse
 
 def gradient_descent_step(A, b, w, sigma):
 	"""
@@ -74,10 +74,12 @@ def gradient_descent_step(A, b, w, sigma):
 		- The vector 'w' resulting from 1 iteration of gradient descent 
 		  starting from w and moving sigma 
 	"""
+	# Each iteration will slightly change the hypothesis vector w 
+	# changning w based on the find_gradient function `
 	return NotImplementedError
 
 if __name__ == '__main__':
 	import random 
 	A, b = read_training_data('train.data')
 	w = Vector(A.D[1], {k : random.choice([1,-1]) for k in A.D[1]})
-	print(A * w)
+	print(fraction_wrong(A, b, w))

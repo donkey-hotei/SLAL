@@ -6,11 +6,11 @@ from util.matrixutil import rowdict2matrix
 def read_training_data(fname, D=None):
     """Given a file in appropriate format, and given a set D of features,
     returns the pair (A, b) consisting of 
-    a P-by-D matrix A and a P-Vectortor b,
+    a P-by-D matrix A and a P-Vector b,
     where P is a set of patient identification integers (IDs).
 
     For each patient ID p,
-      - row p of A is the D-Vectortor describing patient p's tissue sample,
+      - row p of A is the D-Vector describing patient p's tissue sample,
       - entry p of b is +1 if patient p's tissue is malignant, and -1 if it is benign.
 
     The set D of features must be a subset of the features in the data (see text).
