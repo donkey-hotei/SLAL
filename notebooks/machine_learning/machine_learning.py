@@ -60,7 +60,7 @@ def find_gradient(A, b, w):
 	Output:
 		- value of gradient at w 
 	"""
-	return 2 * (A*w - b) # this doesn't return a single valuse
+	return 2 * (A*w - b) 
 
 def gradient_descent_step(A, b, w, sigma):
 	"""
@@ -74,14 +74,12 @@ def gradient_descent_step(A, b, w, sigma):
 		- The vector 'w' resulting from 1 iteration of gradient descent 
 		  starting from w and moving sigma 
 	"""
-	# Each iteration will slightly change the hypothesis vector w 
-	# changning w based on the find_gradient function `
-	return NotImplementedError
+	return NotImplementedError 
+
 
 if __name__ == '__main__':
 	import random 
 	A, b = read_training_data('train.data')
 	w = Vector(A.D[1], {k : random.choice([1,-1]) for k in A.D[1]})
-	print(fraction_wrong(A, b, w))
-	print('\n')
-	print(find_gradient(A, b, w))
+	print("Fraction incorrect with current vector w:" % fraction_wrong(A, b, w))
+
