@@ -118,3 +118,4 @@ class Matrix:
         "evaluatable representation"
         return "Matrix(" + str(self.D) +", " + str(self.f) + ")"
 
+        

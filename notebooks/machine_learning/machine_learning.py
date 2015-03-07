@@ -81,5 +81,5 @@ if __name__ == '__main__':
 	import random 
 	A, b = read_training_data('train.data')
 	w = Vector(A.D[1], {k : random.choice([1,-1]) for k in A.D[1]})
-	print("Fraction incorrect with current vector w:" % fraction_wrong(A, b, w))
+	print("Fraction incorrect with current vector w: %s" % fraction_wrong(A, b, w))
 

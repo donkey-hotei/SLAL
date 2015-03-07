@@ -26,19 +26,19 @@ def identity(D, one):
   return Matrix((D,D), {(d,d):one for d in D})
 
 def keys(d):
-  """Given a dict, returns something that generates the keys; given a list,
-     returns something that generates the indices.  Intended for coldict2mat and rowdict2mat.
-  """
-  return d.keys() if isinstance(d, dict) else range(len(d))
+    """Given a dict, returns something that generates the keys; given a list,
+         returns something that generates the indices.  Intended for coldict2mat and rowdict2mat.
+    """
+    return d.keys() if isinstance(d, dict) else range(len(d))
 
 def value(d):
-  """Given either a dict or a list, returns one of the values.
+    """Given either a dict or a list, returns one of the values.
      Intended for coldict2mat and rowdict2mat.
-  """
-  return next(iter(d.values())) if isinstance(d, dict) else d[0]
+    """
+    return next(iter(d.values())) if isinstance(d, dict) else d[0]
 
 def matrix2rowdict(A):
-  """Given a matrix, return a dictionary mapping row labels of A to rows of A
+    """Given a matrix, return a dictionary mapping row labels of A to rows of A
      e.g.:
      
      >>> M = Mat(({0, 1, 2}, {0, 1}), {(0, 1): 1, (2, 0): 8, (1, 0): 4, (0, 0): 3, (2, 1): -2})
@@ -47,18 +47,18 @@ def matrix2rowdict(A):
      >>> mat2rowdict(Mat(({0,1},{0,1}),{}))
      {0: Vec({0, 1},{0: 0, 1: 0}), 1: Vec({0, 1},{0: 0, 1: 0})}
      """
-  return {row:Vector(A.D[1], {col:A[row,col] for col in A.D[1]}) for row in A.D[0]}
+    return {row:Vector(A.D[1], {col:A[row,col] for col in A.D[1]}) for row in A.D[0]}
 
 def matrix2coldict(A):
-  """Given a matrix, return a dictionary mapping column labels of A to columns of A
+    """Given a matrix, return a dictionary mapping column labels of A to columns of A
      e.g.:
      >>> M = Mat(({0, 1, 2}, {0, 1}), {(0, 1): 1, (2, 0): 8, (1, 0): 4, (0, 0): 3, (2, 1): -2})
      >>> mat2coldict(M)
      {0: Vec({0, 1, 2},{0: 3, 1: 4, 2: 8}), 1: Vec({0, 1, 2},{0: 1, 1: 0, 2: -2})}
      >>> mat2coldict(Mat(({0,1},{0,1}),{}))
      {0: Vec({0, 1},{0: 0, 1: 0}), 1: Vec({0, 1},{0: 0, 1: 0})}
-  """
-  return {col:Vector(A.D[0], {row:A[row,col] for row in A.D[0]}) for col in A.D[1]}
+    """
+    return {col:Vector(A.D[0], {row:A[row,col] for row in A.D[0]}) for col in A.D[1]}
 
 def coldict2matrix(coldict):
     """
@@ -105,20 +105,44 @@ def rowdict2matrix(rowdict):
     return Matrix((set(keys(rowdict)), col_labels), {(r,c):rowdict[r][c] for r in keys(rowdict) for c in col_labels})
 
 def listlist2matrix(L):
-  """Given a list of lists of field elements, return a matrix whose ith row consists
-  of the elements of the ith list.  The row-labels are {0...len(L)}, and the
-  column-labels are {0...len(L[0])}
-  >>> A=listlist2mat([[10,20,30,40],[50,60,70,80]])
-  >>> print(A)
-  <BLANKLINE>
+    """Given a list of lists of field elements, return a matrix whose ith row consists
+    of the elements of the ith list.  The row-labels are {0...len(L)}, and the
+    column-labels are {0...len(L[0])}
+    >>> A=listlist2mat([[10,20,30,40],[50,60,70,80]])
+    >>> print(A)
+    <BLANKLINE>
           0  1  2  3
        -------------
-   0  |  10 20 30 40
-   1  |  50 60 70 80
-  <BLANKLINE>
-"""
-  m,n = len(L), len(L[0])
-  return Matrix((set(range(m)),set(range(n))), {(r,c):L[r][c] for r in range(m) for c in range(n)})
+    0  |  10 20 30 40
+    1  |  50 60 70 80
+    <BLANKLINE>
+    """
+    m,n = len(L), len(L[0])
+    return Matrix((set(range(m)),set(range(n))), {(r,c):L[r][c] for r in range(m) for c in range(n)})
 
+def is_orthogonal(A):
+    """
+    Checks if whether a matrix A is orthogonal.
+    Where an orthogonal matrix is one where the matrix 
+    times it's transpose is the identity matrix.
+    """
+    return A * A.transpose() == identity(A.D)
 
+def vandermonde(vector):
+    """
+    Input: vector - a n-vector 
+    Output: outputs a matrix whose columns 
+            are powers of the input vector.
 
+    Generates a vandermond matrix,
+    this is a useful way of gathering polynomial features
+    from a linear function.
+    """
+    res = Matrix((vector.D,vector.D), {} ) # an n x n matrix 
+    # now we populate the entries of the matrix with powers 
+    # of the elements in the vector 
+    for row in vector.D:
+        power = len(vector.D)
+        for col in vector.D:
+            res[(row,col)] = vector[row]**
+    return NotImplementedError      
