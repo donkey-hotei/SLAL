@@ -137,12 +137,12 @@ def vandermonde(vector):
     Generates a vandermond matrix,
     this is a useful way of gathering polynomial features
     from a linear function.
-    """
-    res = Matrix((vector.D,vector.D), {} ) # an n x n matrix 
-    # now we populate the entries of the matrix with powers 
-    # of the elements in the vector 
-    for row in vector.D:
-        power = len(vector.D)
-        for col in vector.D:
-            res[(row,col)] = vector[row]**
+    # """
+    # res = Matrix((vector.D,vector.D), {} ) # an n x n matrix 
+    # # now we populate the entries of the matrix with powers 
+    # # of the elements in the vector 
+    # for row in vector.D:
+    #     power = len(vector.D)
+    #     for col in vector.D:
+    #         res[(row,col)] = vector[row]**i
     return NotImplementedError      

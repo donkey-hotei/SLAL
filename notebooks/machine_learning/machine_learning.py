@@ -74,8 +74,7 @@ def gradient_descent_step(A, b, w, sigma):
 		- The vector 'w' resulting from 1 iteration of gradient descent 
 		  starting from w and moving sigma 
 	"""
-	return NotImplementedError 
-
+	return NotImplementedError q
 
 if __name__ == '__main__':
 	import random 

@@ -38,7 +38,7 @@ class Matrix:
 
     def __mul__(self,other):
         if Matrix == type(other): # matrix-matrix
-            assert self.D[1] == other.D[0]
+            assert self.D[1] == other.D[0], 'the number of rows in A should match the number of columns of B'
             result_matrix = Matrix((self.D[0],other.D[1]), {})
             for r in self.D[0]:
                 for c in other.D[1]:
