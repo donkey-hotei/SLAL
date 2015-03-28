@@ -1,8 +1,6 @@
 """
 Applications of SLAL
 Perspective Rectification
-by dynsne
-
 
 The goal of this application is to remove perspective from the image.
 

@@ -2,7 +2,6 @@
 Applications of the SLAL:
 Threshold Secret Sharing
 
-by dynsne
 """
 
 
