@@ -1,6 +1,7 @@
-from math import sqrt
 from functools import reduce
 import operator
+
+# euclid's algorithm for gcd
 
 
 def gcd(x, y): return x if y == 0 else gcd(y, x % y)
