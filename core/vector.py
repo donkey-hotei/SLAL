@@ -1,7 +1,7 @@
 """
- ___  __      __    __   
-/ __)(  )    /__\  (  )  
-\__ \ )(__  /(__)\  )(__ 
+ ___  __      __    __
+/ __)(  )    /__\  (  )
+\__ \ )(__  /(__)\  )(__
 (___/(____)(__)(__)(____)
 Sparse Linear Algebra Library
 """
@@ -40,7 +40,8 @@ class Vector:
     # Multiply a vector by a scalar number
     def __rmul__(self, alpha):
         """ Scale a vector. """
-        return Vector(self.D, {label: alpha * self[label] for label in self.f.keys()})
+        return Vector(self.D, {label: alpha * self[label]
+                               for label in self.f.keys()})
 
     # __rmul__ = scalar_mul #if left arg of * is primitive, assume it's a
     # scalar
@@ -59,7 +60,7 @@ class Vector:
         return (1 / other) * self
 
     def __add__(self, other):
-        #assert self.D == other.D
+        # assert self.D == other.D
         if isinstance(other, int):
             raise Exception("Cannot add number with vector.")
         return Vector(self.D, {i: self[i] + other[i] for i in self.D})
@@ -90,7 +91,8 @@ class Vector:
         numdec = 3  # max width used up for each number
         # wd is a dictionary that maps each element in the domain to a max
         # width
-        wd = dict([(k, (1 + max(len(str(k)), len('{0:.{1}G}'.format(v[k], numdec)))))
+        wd = dict([(k, (1 + max(len(str(k)),
+                                len('{0:.{1}G}'.format(v[k], numdec)))))
                    if isinstance(v[k], int)
                    or isinstance(v[k], float)
                    else (k, (1 + max(len(str(k)), len(str(v[k])))))
@@ -109,7 +111,7 @@ class Vector:
 
     def copy(self):
         """" Don't make a new copy of the domain D """
-        return Vec(self.D, self.f.copy())
+        return Vector(self.D, self.f.copy())
 
     def __len__(self):
         """ return number of elements in the vector
@@ -118,4 +120,5 @@ class Vector:
 
     def length(self):
         """  Euclidean length of vector """
-        return math.sqrt(sum(Vector(self.D, {i: self[i] * self[i] for i in self.D})))
+        return math.sqrt(sum(Vector(self.D, {i: self[i] * self[i]
+                                             for i in self.D})))
