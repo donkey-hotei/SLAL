@@ -50,7 +50,7 @@ class Vector:
         """ Take dot product of two vectors. """
         if isinstance(other, Vector):
             assert self.D == other.D
-            # dot product
+            # dot product v * u == v_0 * u_0 + ... + v_n * u_n
             return sum([self[i] * other[i] for i in self.D])
         else:
             # Will cause other.__rmul__(self) to be invoked

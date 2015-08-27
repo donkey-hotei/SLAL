@@ -3,6 +3,8 @@ Row Reduction of a Matrix (represented as a list of row Vectors)
 """
 from matrixutil import matrix2rowdict
 
+# gaussian elimination
+
 
 def row_reduce(rowlist):
     """
