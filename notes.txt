@@ -1,0 +1,5 @@
+SLAL Implementation Notes
+TODO:
+	+ Expand the README.md
+	+ Condense the library into one namespace.
+	  - Involves creating a flat file where everything lives.

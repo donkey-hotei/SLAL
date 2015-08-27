@@ -1,0 +1,8 @@
+    # algorithm will iterate through the column labels in order.
+    # in each iteration the algorithm finds a list rows_with_nonzero from the
+    # rows with nonzero entries
+    # rows that have nonzero entries in the current column
+    # The algorithm will then select one of these rows (the pivot row)
+    # and adds it to the new_rowlist,
+    # and removes it from rows_left
+

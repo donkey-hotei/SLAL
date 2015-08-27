@@ -97,7 +97,10 @@ class Vector:
                    or isinstance(v[k], float)
                    else (k, (1 + max(len(str(k)), len(str(v[k])))))
                    for k in D_list])
-        # w = 1+max([len(str(k)) for k in D_list]+[len('{0:.{1}G}'.format(value,numdec)) for value in v.f.values()])
+        # w = 1 + max(
+        #     [len(str(k)) for k in D_list]
+        #     + [len('{0:.{1}G}'.format(value, numdec))
+        #        for value in v.f.values()])
         s1 = ''.join(['{0:>{1}}'.format(k, wd[k]) for k in D_list])
         s2 = ''.join(['{0:>{1}.{2}G}'.format(v[k], wd[k], numdec)
                       if isinstance(v[k], int)

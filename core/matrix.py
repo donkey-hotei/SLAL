@@ -1,7 +1,7 @@
 """
- ___  __      __    __   
-/ __)(  )    /__\  (  )  
-\__ \ )(__  /(__)\  )(__ 
+ ___  __      __    __
+/ __)(  )    /__\  (  )
+\__ \ )(__  /(__)\  )(__
 (___/(____)(__)(__)(____)
 Sparse Linear Algebra Library
 """
@@ -12,18 +12,18 @@ class Matrix:
 
     """
     A Matrix has two fields:
-    D - the domain (a tuple of two sets, the first is the row domain, second in column domain
+    D - the domain (a tuple of two sets,
+        the first is the row domain, second in column domain)
     f - a dictionary mapping some of elements in the domain to a field,
-        follows the sparsity convention of the Vector class
+        follows a sparsity convention
     """
 
     def __init__(self, labels, function):
         self.D = labels
         self.f = function
-        # rows = labels[0]
-        # columns = labels[1]
 
     def __getitem__(self, k):
+        # this is the sparsity convention
         return 0 if k not in self.f else self.f[k]
 
     def __setitem__(self, k, val): self.f[k] = val
@@ -42,7 +42,8 @@ class Matrix:
     def __mul__(self, other):
         if Matrix == type(other):  # matrix-matrix
             assert self.D[1] == other.D[
-                0], 'the number of rows in A should match the number of columns of B'
+                0], 'the number of rows in A should match' \
+                ' the number of columns of B'
             result_matrix = Matrix((self.D[0], other.D[1]), {})
             for r in self.D[0]:
                 for c in other.D[1]:
@@ -57,7 +58,7 @@ class Matrix:
                                   for c in self.D[1])
                            for r in self.D[0]})
 
-        elif type(other) == int or type(other) == float:
+        elif type(other) in [int, float]:
             # scalar-matrix
             result_matrix = Matrix((self.D[0], self.D[1]), {})
             for (i, j) in self.f.keys():
@@ -105,27 +106,29 @@ class Matrix:
 
     def __str__(M, rows=None, cols=None):
         "string representation for print()"
-        if rows == None:
-            rows = sorted(M.D[0], key=repr)
-        if cols == None:
-            cols = sorted(M.D[1], key=repr)
+        rows = sorted(M.D[0], key=repr)
+        cols = sorted(M.D[1], key=repr)
         separator = ' | '
         numdec = 3
         pre = 1 + max([len(str(r)) for r in rows])
-        colw = {col: (1 + max([len(str(col))] + [len('{0:.{1}G}'.format(M[row, col], numdec))
-                                                 if isinstance(M[row, col], int)
-                                                 or isinstance(M[row, col], float)
-                                                 else len(str(M[row, col]))
-                                                 for row in rows])) for col in cols}
+        colw = {col:
+                (1 + max([len(str(col))]
+                         + [len('{0:.{1}G}'.format(M[row, col], numdec))
+                            if isinstance(M[row, col], int)
+                            or isinstance(M[row, col], float)
+                            else len(str(M[row, col]))
+                            for row in rows])) for col in cols}
         s1 = ' ' * (1 + pre + len(separator))
         s2 = ''.join(['{0:>{1}}'.format(c, colw[c]) for c in cols])
         s3 = ' ' * (pre + len(separator)) + '-' * \
             (sum(list(colw.values())) + 1)
-        s4 = ''.join(['{0:>{1}} {2}'.format(r, pre, separator) + ''.join(['{0:>{1}.{2}G}'.format(M[r, c], colw[c], numdec)
-                                                                          if isinstance(M[r, c], int)
-                                                                          or isinstance(M[r, c], float)
-                                                                          else '{0:>{1}}'.format(M[r, c], colw[c])
-                                                                          for c in cols]) + '\n' for r in rows])
+        s4 = ''.join(
+            ['{0:>{1}} {2}'.format(r, pre, separator)
+             + ''.join(['{0:>{1}.{2}G}'.format(M[r, c], colw[c], numdec)
+                        if isinstance(M[r, c], int)
+                        or isinstance(M[r, c], float)
+                        else '{0:>{1}}'.format(M[r, c], colw[c])
+                        for c in cols]) + '\n' for r in rows])
         return '\n' + s1 + s2 + '\n' + s3 + '\n' + s4
 
     def prettyprint(self, rows, cols):

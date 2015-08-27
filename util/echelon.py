@@ -11,30 +11,18 @@ from matrixutil import matrix2rowdict, identity, coldict2matrix
 
 def rref(A):
     """
-    Takes a matrix and returns it's reduced row echelon form.
+    Input: A -> a Matrix
+    Output: echelon_A -> the Matrix A put into echelon form
     """
-    # We'll represent a matrix as a list of row vectors .
-    rowlist = matrix2rowdict(A)
-    # create an identity matrix with the same square domain as A
-    M_rowlist = identity(A.D[1], 1)
-    # to handle vectors with an arbitrary domain, we must decide on an ordering
-    column_label_list = sorted(rowlist[0].D, key=str)
-    # first attempt at transforming a rowlist into one that is in echelon form
-    # sort the rows by the position of the leftmost entry
-    # new_rowlist = []
+    rowlist = matrix2rowdict(A)  # matrix as row vectors
+    M_rowlist = identity(A.D[1], 1)  # same sq. domain as A
+    column_label_list = sorted(rowlist[0].D, key=str)  # decide on an ordering
     new_M_rowlist = []
     rows_left = set(range(len(rowlist)))
-    # algorithm will itereate through the column labels in order .
-    # in each iteration the algorithm finds a list rows_with_nonzero from the
-    # rows with nonzero entries
-    # rows that have nonzero entries in the current column
-    # The algorithm will then select one of these rows (the pivot row)
-    # and adds it to the new_rowlist,
-    # and removes it from rows_left
     for c in column_label_list:
         rows_with_nonzero = [r for r in rows_left if rowlist[r][c] != 0]
-        if rows_with_nonzero != []:  # if the matrix was not a zero matrix
-            pivot = rows_with_nonzero[0]
+        if rows_with_nonzero != []:  # if there is a pivot point
+            pivot = rows_with_nonzero[0]  # pivot at the first nonzero row
             rows_left.remove(pivot)
             new_M_rowlist.append(M_rowlist[pivot])
             for r in rows_with_nonzero[1:]:
@@ -43,19 +31,17 @@ def rref(A):
                 M_rowlist[r] -= multiplier * M_rowlist[pivot]
         for r in rows_left:
             new_M_rowlist.append(M_rowlist[r])
-    print(new_M_rowlist)
-    new_A = coldict2matrix(new_M_rowlist)
-    return new_A
+    echelon_A = coldict2matrix(new_M_rowlist)
+    return echelon_A
 
 
 def row_reduce(rowlist):
     """
-    Given a list of vectors, transforms the vectors,
-    Mutates the arguement.
-    Returns a list of nonzero reduced vectors, such that the matrix made
-    of them is in row reduced form.
+    Input: rowlist -> a Matrix represented as a list of row vectors
+    Output: new_rowlist -> a Matrix in row reduced form
+                           as a list of row vectors
     """
-    col_label_list = sorted(
+    col_label_list = sorted(  # decide on an ordering
         rowlist[0].D, key=str)
     # we'll represent a matrix as a list of row vectors
     # initialiing a set of vectors not yet transformed
@@ -72,8 +58,8 @@ def row_reduce(rowlist):
             # and adds it to the new rowlist
             new_rowlist.append(rowlist[pivot])
             for r in rows_with_nonzero[1:]:
-                rowlist[
-                    r] -= (rowlist[r][c] / rowlist[pivot][c]) * rowlist[pivot]
+                rowlist[r] -= \
+                    (rowlist[r][c] / rowlist[pivot][c]) * rowlist[pivot]
     return new_rowlist
 
 
