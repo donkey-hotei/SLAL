@@ -48,9 +48,9 @@ class Vector:
 
     def __mul__(self, other):
         """ Take dot product of two vectors. """
-        # If other is a vector, returns the dot product of self and other
         if isinstance(other, Vector):
             assert self.D == other.D
+            # dot product
             return sum([self[i] * other[i] for i in self.D])
         else:
             # Will cause other.__rmul__(self) to be invoked
@@ -87,11 +87,9 @@ class Vector:
 
     def __str__(v):
         "pretty-printing"
-        D_list = sorted(v.D, key=repr)  # sort the domain into a list
-        numdec = 3  # max width used up for each number
-        # wd is a dictionary that maps each element in the domain to a max
-        # width
-        wd = dict([(k, (1 + max(len(str(k)),
+        D_list = sorted(v.D, key=repr)
+        numdec = 3  # max width used up for each element
+        wd = dict([(k, (1 + max(len(str(k)),  # each element's max width
                                 len('{0:.{1}G}'.format(v[k], numdec)))))
                    if isinstance(v[k], int)
                    or isinstance(v[k], float)
