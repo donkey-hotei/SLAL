@@ -1,15 +1,16 @@
 """
-SLAL: Utility functions for working over Galois Field(2) ! 
+Utility functions for working over GF2
 """
-from random import choice
+
+# from random import choice
 from itertools import combinations, chain
 
-from vector import Vector
-from matrix import Matrix
+# from vector import Vector
+# from matrix import Matrix
 from GF2 import zero, one
 
 
-def GF2_span(veclis):
+def GF2_span(veclist):
     """ Returns the set of all linear combinations
         of the vectors in a vectorset.
     """
@@ -20,7 +21,7 @@ def GF2_span(veclis):
     return span
 
 
-def linear_comb(clist: list, vlist: list) -> Vector:
+def linear_comb(clist, vlist):
     """
     Returns a linear combination of the vectors in vlist
     with the corresponding coefficients in clist.
@@ -29,11 +30,13 @@ def linear_comb(clist: list, vlist: list) -> Vector:
     return sum([coeff * vec for (coeff, vec) in zip(clist, vlist)])
 
 
-def powerset(coeffs: set) -> list:
+def powerset(coeffs):
     """
     Gives all the possible n-length subset combinations of a set.
     """
     powerset = []
-    for z in chain.from_iterable(combinations(coeffs, r) for r in range(len(coeffs) + 1)):
+    for z in chain.from_iterable(
+            combinations(coeffs, r)
+            for r in range(len(coeffs) + 1)):
         powerset.append(z)
     return powerset

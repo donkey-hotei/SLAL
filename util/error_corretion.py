@@ -13,17 +13,17 @@ from matrixutil import matrix2coldict
 from vectorutil import list2vector
 import bitutil
 
- 
+
 # Hamming discovered a code in which a four bit message
 # is represented by a seven-bit codeword.
 # This generator matrix is:
 G = listlist2matrix([[one, zero, one, one],
                      [one, one, zero, one],
-                     [zero,zero,zero, one],
+                     [zero, zero, zero, one],
                      [one, one, one, zero],
-                     [zero,zero, one,zero],
-                     [zero, one,zero,zero],
-                     [one, zero,zero,zero]])
+                     [zero, zero, one, zero],
+                     [zero, one, zero, zero],
+                     [one, zero, zero, zero]])
 # it is tradtional to define the generator matrix so that
 # its rows are generators for C. We diverge from this
 # tradition for the sake of simplicity.
@@ -38,12 +38,12 @@ R = listlist2matrix([[zero, zero, zero, zero, zero, zero, one],
                      [zero, zero, one, zero, zero, zero, zero]])
 
 
-#R = listlist2matrix([[one, one, zero, one, zero, zero, one],
+# R = listlist2matrix([[one, one, zero, one, zero, zero, one],
 #                     [zero, one, zero, one, zero, one, zero],
 #                     [one, zero, zero, one, one, zero, zero],
 #                     [one, one, one, zero, zero, zero, zero]])
 
-# The [3,7] Hamming Matrix - how we find the posistion of the error 
+# The [3,7] Hamming Matrix - how we find the posistion of the error
 # Notice anythin special about the columns and their order?
 # (From the left to the right they are counting in binary
 H = listlist2matrix([[zero, zero, zero, one, one, one, one],
@@ -56,15 +56,16 @@ def find_error(err):
     input:-> the corrupted message err
     ouput:-> the error syndrome corresponding to err
     """
-    position = sum([2**(i-1) for i in err.f.keys() if err.f[i] == one]) - 1
+    position = sum([2**(i - 1) for i in err.f.keys() if err.f[i] == one]) - 1
     if position < 0:
-        return Vector( err.D, {} )
+        return Vector(err.D, {})
     else:
-        return Vector( err.D, {position:one} )
+        return Vector(err.D, {position: one})
 
 c_ = list2vector([one, zero, one, one, zero, one, one])
 e = find_error(c_)
 codeword = e + c_
+
 
 def find_error_matrix(S):
     """
@@ -76,6 +77,7 @@ def find_error_matrix(S):
     return coldict2matrix([find_error(columns[col]) for col in columns])
 
 s = "I'm trying to free your mind Neo but I can only show you the door. You're the one who has to walk through it."
+
 
 def str2matrix(text):
     """
