@@ -59,6 +59,7 @@ class Vector:
     def __truediv__(self, other):  # Scalar division
         return (1 / other) * self
 
+
     def __add__(self, other):
         # assert self.D == other.D
         if isinstance(other, int):

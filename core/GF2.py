@@ -1,4 +1,4 @@
-# Galois Field 2: The Binary Numbers
+# the finite Galois Field 2: The Binary Numbers
 from numbers import Number
 
 

@@ -16,7 +16,7 @@ from matrixutil import matrix2coldict, coldict2mat
 
 
 def factor(A):
-    """ Implementation of the Gram-Schmidt procedure
+    """ Implementation of the Gram-Schmidt procedure.
     """
     col_labels = sorted(A.D[1], key=hash)
     Acols = dict2list(matrix2coldict(A), col_labels)

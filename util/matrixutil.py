@@ -1,15 +1,11 @@
 """
-SLAL: Sparse Linear Algebra Library
-by dysne
-(c)opyleft
-
 Matrix utility functions.
 """
-from core.vector import Vector
-from core.matrix import Matrix
+from core.Vector import Vector
+from core.Matrix import Matrix
 
 
-def efficient_rowdict2mat(rowdict):
+def efficient_rowdict2matrix(rowdict):
     col_labels = value(rowdict).D
     M = Matrix((set(keys(rowdict)), col_labels), {})
     for r in rowdict:
@@ -19,51 +15,68 @@ def efficient_rowdict2mat(rowdict):
 
 
 def identity(D, one):
-    """Given a set D and the field's one, returns the DxD identity matrix
+    """Given a set D and the field's one, returns the DxD identity Matrix
     e.g.:
 
     >>> identity({0,1,2}, 1)
-    Mat(({0, 1, 2}, {0, 1, 2}), {(0, 0): 1, (1, 1): 1, (2, 2): 1})
+    Matrix(({0, 1, 2}, {0, 1, 2}), {(0, 0): 1, (1, 1): 1, (2, 2): 1})
     """
     return Matrix((D, D), {(d, d): one for d in D})
 
 
 def keys(d):
-    """Given a dict, returns something that generates the keys; given a list,
-         returns something that generates the indices.  Intended for coldict2mat and rowdict2mat.
+    """
+    Input: d -> a dictionary or list
+    Output: an iterable of for keys
+
+    Intended for use with coldict2matrix and rowdict2matrix.
     """
     return d.keys() if isinstance(d, dict) else range(len(d))
 
 
 def value(d):
     """Given either a dict or a list, returns one of the values.
-     Intended for coldict2mat and rowdict2mat.
+     Intended for coldict2matrix and rowdict2matrix.
     """
     return next(iter(d.values())) if isinstance(d, dict) else d[0]
 
 
 def matrix2rowdict(A):
-    """Given a matrix, return a dictionary mapping row labels of A to rows of A
+    """
+    Input: A -> a Matrix
+    Output: a dictionary mapping row labels of A to rows of A.
      e.g.:
 
-     >>> M = Mat(({0, 1, 2}, {0, 1}), {(0, 1): 1, (2, 0): 8, (1, 0): 4, (0, 0): 3, (2, 1): -2})
-     >>> mat2rowdict(M)
-     {0: Vec({0, 1},{0: 3, 1: 1}), 1: Vec({0, 1},{0: 4, 1: 0}), 2: Vec({0, 1},{0: 8, 1: -2})}
-     >>> mat2rowdict(Mat(({0,1},{0,1}),{}))
-     {0: Vec({0, 1},{0: 0, 1: 0}), 1: Vec({0, 1},{0: 0, 1: 0})}
+     >>> M = Matrix(({0, 1, 2}, {0, 1}),
+                 {(0, 1): 1, (2, 0): 8, (1, 0): 4, (0, 0): 3, (2, 1): -2})
+
+     >>> matrix2rowdict(M)
+     {0: Vector({0, 1},{0: 3, 1: 1}),
+      1: ({0, 1},{0: 4, 1: 0}),
+      2: Vector({0, 1},{0: 8, 1: -2})}
+
+     >>> matrix2rowdict(Matrix(({0,1},{0,1}),{}))
+     {0: Vector({0, 1},{0: 0, 1: 0}), 1: Vector({0, 1},{0: 0, 1: 0})}
      """
     return {row: Vector(A.D[1], {col: A[row, col]
                                  for col in A.D[1]}) for row in A.D[0]}
 
 
 def matrix2coldict(A):
-    """Given a matrix, return a dictionary mapping column labels of A to columns of A
+    """
+    Input: A -> a Matrix
+    Output: a dictionary mapping column labels to columns of A.
+
      e.g.:
-     >>> M = Mat(({0, 1, 2}, {0, 1}), {(0, 1): 1, (2, 0): 8, (1, 0): 4, (0, 0): 3, (2, 1): -2})
-     >>> mat2coldict(M)
-     {0: Vec({0, 1, 2},{0: 3, 1: 4, 2: 8}), 1: Vec({0, 1, 2},{0: 1, 1: 0, 2: -2})}
-     >>> mat2coldict(Mat(({0,1},{0,1}),{}))
-     {0: Vec({0, 1},{0: 0, 1: 0}), 1: Vec({0, 1},{0: 0, 1: 0})}
+     >>> M = Matrix(({0, 1, 2}, {0, 1}),
+                {(0, 1): 1, (2, 0): 8, (1, 0): 4, (0, 0): 3, (2, 1): -2})
+
+     >>> matrix2coldict(M)
+     {0: Vector({0, 1, 2},{0: 3, 1: 4, 2: 8}),
+      1: Vector({0, 1, 2},{0: 1, 1: 0, 2: -2})}
+
+     >>> matrix2coldict(Matrix(({0,1},{0,1}),{}))
+     {0: Vector({0, 1},{0: 0, 1: 0}), 1: Vector({0, 1},{0: 0, 1: 0})}
     """
     return {col: Vector(A.D[0], {row: A[row, col]
                                  for row in A.D[0]}) for col in A.D[1]}
@@ -71,21 +84,22 @@ def matrix2coldict(A):
 
 def coldict2matrix(coldict):
     """
-    Given a dictionary or list whose values are Vecs, returns the Mat having these
-    Vecs as its columns.  This is the inverse of mat2coldict.
-    Assumes all the Vecs have the same label-set.
-    Assumes coldict is nonempty.
-    If coldict is a dictionary then its keys will be the column-labels of the Mat.
-    If coldict is a list then {0...len(coldict)-1} will be the column-labels of the Mat.
+    Input: coldict -> a dictionary whose values are Vectors
+    Output: a Matrix having those Vectortors as columns.
+
+    If coldict is a dictionary then its keys will be the
+    column-labels of the Matrix.
+    If coldict is a list then {0...len(coldict)-1} will
+    be the column-labels of the Matrix.
     e.g.:
 
-    >>> A = {0:Vec({0,1},{0:1,1:2}),1:Vec({0,1},{0:3,1:4})}
-    >>> B = [Vec({0,1},{0:1,1:2}),Vec({0,1},{0:3,1:4})]
-    >>> mat2coldict(coldict2mat(A)) == A
+    >>> A = {0:Vector({0,1},{0:1,1:2}),1:Vector({0,1},{0:3,1:4})}
+    >>> B = [Vector({0,1},{0:1,1:2}),Vector({0,1},{0:3,1:4})]
+    >>> matrix2coldict(coldict2matrix(A)) == A
     True
-    >>> coldict2mat(A)
-    Mat(({0, 1}, {0, 1}), {(0, 1): 3, (1, 0): 2, (0, 0): 1, (1, 1): 4})
-    >>> coldict2mat(A) == coldict2mat(B)
+    >>> coldict2matrix(A)
+    Matrix(({0, 1}, {0, 1}), {(0, 1): 3, (1, 0): 2, (0, 0): 1, (1, 1): 4})
+    >>> coldict2matrix(A) == coldict2matrix(B)
     True
     """
     row_labels = value(coldict).D
@@ -95,23 +109,26 @@ def coldict2matrix(coldict):
                    for r in row_labels})
 
 
-def rowdict2matrix(rowdict):
+def rowdict2Matrix(rowdict):
     """
-    Given a dictionary or list whose values are Vecs, returns the Mat having these
-    Vecs as its rows.  This is the inverse of mat2rowdict.
-    Assumes all the Vecs have the same label-set.
+    Input: rowdict -> a dictionary or list whose values are Vectors
+    Output: a Matrix having these Vectors as its rows.
+
+    Assumes all the Vectors have the same label-set.
     Assumes row_dict is nonempty.
-    If rowdict is a dictionary then its keys will be the row-labels of the Mat.
-    If rowdict is a list then {0...len(rowdict)-1} will be the row-labels of the Mat.
+    If rowdict is a dictionary then its keys will be the
+    row-labels of the Matrix.
+    If rowdict is a list then {0...len(rowdict)-1} will
+    be the row-labels of the Matrix.
     e.g.:
 
-    >>> A = {0:Vec({0,1},{0:1,1:2}),1:Vec({0,1},{0:3,1:4})}
-    >>> B = [Vec({0,1},{0:1,1:2}),Vec({0,1},{0:3,1:4})]
-    >>> mat2rowdict(rowdict2mat(A)) == A
+    >>> A = {0:Vector({0,1},{0:1,1:2}),1:Vector({0,1},{0:3,1:4})}
+    >>> B = [Vector({0,1},{0:1,1:2}),Vector({0,1},{0:3,1:4})]
+    >>> matrix2rowdict(rowdict2Matrix(A)) == A
     True
-    >>> rowdict2mat(A)
-    Mat(({0, 1}, {0, 1}), {(0, 1): 2, (1, 0): 3, (0, 0): 1, (1, 1): 4})
-    >>> rowdict2mat(A) == rowdict2mat(B)
+    >>> rowdict2matrix(A)
+    Matrix(({0, 1}, {0, 1}), {(0, 1): 2, (1, 0): 3, (0, 0): 1, (1, 1): 4})
+    >>> rowdict2matrix(A) == rowdict2matrix(B)
     True
     """
     col_labels = value(rowdict).D
@@ -122,17 +139,21 @@ def rowdict2matrix(rowdict):
 
 
 def listlist2matrix(L):
-    """Given a list of lists of field elements, return a matrix whose ith row consists
-    of the elements of the ith list.  The row-labels are {0...len(L)}, and the
-    column-labels are {0...len(L[0])}
-    >>> A=listlist2mat([[10,20,30,40],[50,60,70,80]])
+    """
+    Input: L -> a list of lists of field elements
+    Output: a Matrix whose ith rows consists of the elements
+            in the ith list.
+            Row labels are {0..len(L)}, and the
+            column labels are {0..len(L[0])}
+
+    >>> A=listlist2Matrix([[10,20,30,40],[50,60,70,80]])
     >>> print(A)
-    <BLANKLINE>
+
           0  1  2  3
        -------------
     0  |  10 20 30 40
     1  |  50 60 70 80
-    <BLANKLINE>
+
     """
     m, n = len(L), len(L[0])
     return Matrix((set(range(m)), set(range(n))),
@@ -143,28 +164,8 @@ def listlist2matrix(L):
 
 def is_orthogonal(A):
     """
-    Checks if whether a matrix A is orthogonal.
-    Where an orthogonal matrix is one where the matrix 
-    times it's transpose is the identity matrix.
+    Input: A -> a Matrix
+    Ouput: a boolean indicating whether the A is orthogonal.
     """
+    # orthogonal iff A * A^T is the identity matrix
     return A * A.transpose() == identity(A.D)
-
-
-def vandermonde(vector):
-    """
-    Input: vector - a n-vector 
-    Output: outputs a matrix whose columns 
-            are powers of the input vector.
-
-    Generates a vandermond matrix,
-    this is a useful way of gathering polynomial features
-    from a linear function.
-    # """
-    # res = Matrix((vector.D,vector.D), {} ) # an n x n matrix
-    # now we populate the entries of the matrix with powers
-    # of the elements in the vector
-    # for row in vector.D:
-    #     power = len(vector.D)
-    #     for col in vector.D:
-    #         res[(row,col)] = vector[row]**i
-    return NotImplementedError

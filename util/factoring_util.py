@@ -8,10 +8,14 @@ def gcd(x, y): return x if y == 0 else gcd(y, x % y)
 
 
 def dumb_factor(x, primeset):
-    """ If x can be factored over the primeset, return the
-    set of pairs (p_i, a_i) such that x is the product
-    of p_i to the power of a_i.
-    If not, return []
+    """
+    Input: x -> an integer
+           primeset -> a set of prime numbers
+    Output: a set of pairs (p_i, a_i) s.t. x is
+            the product of p_i to the power of a_i
+
+    If x can't be factored over the set of primes
+    return an empty list.
     """
     factors = []
     for p in primeset:
@@ -25,20 +29,28 @@ def dumb_factor(x, primeset):
 
 
 def primes(limit):
+    """
+    Input: limit -> an integer
+    Output: a list of all primes in the range [0, .., limit]
+    """
     primeset = set()
-    a = [True] * limit  # Initialize the primality list
+    a = [True] * limit  # initialize the primality list
     a[0] = a[1] = False
     for (i, isprime) in enumerate(a):
         if isprime:
             primeset.add(i)
-            for n in range(i * i, limit, i):  # Mark factors non-prime
+            for n in range(i * i, limit, i):  # mark factors as non-prime
                 a[n] = False
     return primeset
 
 
 def intsqrt(x):
-    L = 1
-    H = x
+    """
+    Input: x -> an integer
+    Output: the integer square root of x
+    """
+    L = 1  # low
+    H = x  # high
     if H < L:
         L, H = H, L
     while H - L > 1:
@@ -52,5 +64,9 @@ def intsqrt(x):
 
 
 def prod(factors):
-    "return product of numbers in given list"
+    """
+    Input: factors -> a list of factors
+    Output: the product of those factors.
+    """
+    # 1 is the multiplicative identity
     return reduce(operator.mul, factors, 1)
