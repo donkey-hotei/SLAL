@@ -5,22 +5,19 @@
 (___/(____)(__)(__)(____)
 Sparse Linear Algebra Library
 """
-from core.vector import Vector
-
+from .vector import Vector
 
 class Matrix:
 
     """
     A Matrix has two fields:
-    D - the domain (a tuple of two sets,
-        the first is the row domain, second in column domain)
-    f - a dictionary mapping some of elements in the domain to a field,
-        follows a sparsity convention
+    D - (tuple[set, set]), the domain
+    f - (dict), a function mapping element of the domain D to codomain
     """
 
-    def __init__(self, labels, function):
+    def __init__(self, labels=set(), function=None):
         self.D = labels
-        self.f = function
+        self.f = {} if function is None else function
 
     def __getitem__(self, k):
         # this is the sparsity convention

@@ -12,14 +12,14 @@ class Vector:
 
     """
     A vector has two fields:
-    D - the domain (a set)
+    D - (set), the domain
     f - a dictionary mapping (some) domain elements to field elements
         elements of D not appearing in f are implicitly mapped to zero
     """
 
-    def __init__(self, labels=set(), function={}):
+    def __init__(self, labels=set(), function=None):
         self.D = labels
-        self.f = function  # maps from domain to image
+        self.f = {} if function is None else function
 
     # the __getitem__ function hangs when called by __mul__ ...
     def __getitem__(self, d):
@@ -118,7 +118,7 @@ class Vector:
     def __len__(self):
         """ return number of elements in the vector
         """
-        return len(self.f.iteritems())
+        return len(self.f.keys())
 
     def length(self):
         """  Euclidean length of vector """
