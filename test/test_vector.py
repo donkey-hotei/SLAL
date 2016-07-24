@@ -60,7 +60,11 @@ class TestVectorClass(unittest.TestCase):
 
     def test_vector_subtraction(self):
         """ Test __sub__ method. """
-        pass
+        domain = range(1, 4)
+        v = Vector(domain, dict(zip(domain, domain)))
+        w = Vector(domain, dict(zip(domain, domain)))
+        res = Vector(domain, [0, 0, 0])
+        self.assertEqual(v - w, res)
 
     def test_vector_exponentation(self):
         pass
