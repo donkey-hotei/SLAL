@@ -1,15 +1,6 @@
-"""
- ___  __      __    __
-/ __)(  )    /__\  (  )
-\__ \ )(__  /(__)\  )(__
-(___/(____)(__)(__)(____)
-Sparse Linear Algebra Library
-"""
 import math
 
-
 class Vector:
-
     """
     A vector has two fields:
     D - (set), the domain
@@ -20,6 +11,8 @@ class Vector:
     def __init__(self, labels=set(), function=None):
         self.D = labels
         self.f = {} if function is None else function
+        assert isinstance(self.D, set)
+        assert isinstance(self.f, dict)
 
     # the __getitem__ function hangs when called by __mul__ ...
     def __getitem__(self, d):
@@ -77,7 +70,6 @@ class Vector:
 
     def __eq__(self, other):
         assert self.D == other.D
-        # this is clearly a recursive cal
         return [self[e] for e in self.D] == [other[e] for e in other.D]
 
     def __pow__(self, exponent):
@@ -85,6 +77,10 @@ class Vector:
         for _ in range(exponent):
             result *= result
         return result
+
+    def __iter__(self):
+        for i in self.f.values():
+            yield i
 
     def __str__(v):
         "pretty-printing"
