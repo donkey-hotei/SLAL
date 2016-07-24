@@ -1,45 +1,14 @@
-```
- ___  __      __    __   
-/ __)(  )    /__\  (  )  
-\__ \ )(__  /(__)\  )(__ 
-(___/(____)(__)(__)(____)
-```
-Sparse Linear Algebra Library is
-a simple library written in pure-python for exploring problems in linear algebra.
-This library is meant for educational purposes only, and the lousy developer who created
-this software is not responsible for any engineering mishaps that occur due to the use
-of this library. 
-You may be wondering why anyone would write a linear algebra library on their own when so many other, and better, libraries exist for the same purpose. The main reason is that I wanted to learn some linear algebra and being able to tell a machine how to operate  is an excellent litmus test for one's own knowledge of a subject.  
-http://en.wikipedia.org/wiki/Not_invented_here
+# Sparse Linear Algebra Library
+A simple library written in pure-python for exploring problems in linear algebra. This library
+is meant for educational purposes only (i.e: as a way for the lousy developer who created this
+library to learn concepts in linear algebra in an applied manner, as being able to tell a machine
+how-to-do is an excellent litmus test for one's own knowledge).
 
 Library is only compatible with Python3 or greater & will likely never become backwards compatible.
 
-Matrix-Vector Multiplication 
-```python
-from SLAL.core.matrix import Matrix
-from SLAL.core.vector import Vector
-from SLAL.utils.matrixutil import listlist2matrix
-from SLAL.utils.vectorutil import list2vector
-
->>> A = listlist2matrix([[ 1, 1 ],
-                         [ 2, 3]])
->>> x = list2vector([1, 2])
-
->>> print(A)
-       0 1
-     -----
- 0  |  1 1
- 1  |  2 3
-
->>> print(x)
- 0 1
-----
- 1 2
- 
- >> print(M * v)
- 0 1
-----
- 3 8  
-
-
+## Installation
+Installation is simple.
+```bash
+git clone https://github.com/donkey-hotei/SLAL.git
+cd SLAL && python setup.py install
 ```
