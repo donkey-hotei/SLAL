@@ -1,5 +1,5 @@
 # Sparse Linear Algebra Library
-A simple library written in pure-python for exploring concepts and problem in linear algebra. 
+A simple library written in pure-python for exploring concepts in linear algebra. 
 This library is meant for educational purposes only, as a way for the lousy developer who created 
 this library to learn concepts in linear algebra in a fun and applied manner.
 
