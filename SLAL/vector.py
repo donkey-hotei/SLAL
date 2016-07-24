@@ -57,6 +57,8 @@ class Vector:
         """ Scalar division. """
         return (1 / other) * self
 
+    __div__ = __truediv__
+
     def __add__(self, other):
         """Add two vectors."""
         assert self.D == other.D
@@ -118,7 +120,8 @@ class Vector:
         return "Vector(" + str(self.D) + "," + str(self.f) + ")"
 
     def copy(self):
-        """" Don't make a new copy of the domain D """
+        """" Perform shallow copy. """
+        # don't make a new copy of the domain
         return Vector(self.D, self.f.copy())
 
     def __len__(self):
