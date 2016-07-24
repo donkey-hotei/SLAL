@@ -11,6 +11,12 @@ class TestVectorClass(unittest.TestCase):
         v[0] = 42
         self.assertEqual(v[0], 42)
 
+    def test_shallow_copy(self):
+        """ Test copy method. """
+        v = Vector()
+        w = v.copy()
+        self.assertFalse(v is w)
+
     def test_sparsity_convention(self):
         """Test __getitem__ with element doesn't exist."""
         v = Vector(labels={i for i in range(10)})
@@ -76,6 +82,14 @@ class TestVectorClass(unittest.TestCase):
         self.assertEqual(v**1, v)
         self.assertEqual(v**2, res_one)
         self.assertEqual(v**3, res_two)
+
+    def test_scalar_division(self):
+        """ Test __truediv__ method. """
+        c = 2.
+        domain = range(1, 4)
+        v = Vector(domain, domain)
+        res = Vector(domain, [0.5, 1.0, 1.5])
+        self.assertEqual(v / c, res)
 
 
 if __name__ == '__main__':
