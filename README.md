@@ -1,9 +1,7 @@
 # Sparse Linear Algebra Library
-A simple library written in pure-python for exploring problems in linear algebra. This library
-is meant for educational purposes only, as a way for the lousy developer who created this
-library to learn concepts in linear algebra in an applied manner.
-
-Library is only compatible with Python3 or greater & will likely never become backwards compatible.
+A simple library written in pure-python for exploring concepts and problem in linear algebra. 
+This library is meant for educational purposes only, as a way for the lousy developer who created 
+this library to learn concepts in linear algebra in a fun and applied manner.
 
 ## How to Install
 Installation is simple.
