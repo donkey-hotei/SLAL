@@ -1,4 +1,5 @@
 import math
+from itertools import cycle
 
 class Vector:
     """
@@ -9,10 +10,14 @@ class Vector:
     """
 
     def __init__(self, labels=set(), function=None):
+        # perform type-casting if user passes in list or tuples
+        if not isinstance(labels, set):
+            labels = set(labels)
+        if function is not None and not isinstance(function, dict):
+            function = {k: v for k,v in zip(cycle(labels), function)}
+
         self.D = labels
         self.f = {} if function is None else function
-        assert isinstance(self.D, set)
-        assert isinstance(self.f, dict)
 
     # the __getitem__ function hangs when called by __mul__ ...
     def __getitem__(self, d):
@@ -36,8 +41,7 @@ class Vector:
         return Vector(self.D, {label: alpha * self[label]
                                for label in self.f.keys()})
 
-    # __rmul__ = scalar_mul #if left arg of * is primitive, assume it's a
-    # scalar
+    # __rmul__ = scalar_mul #if left arg of * is primitive, assume it's a scalar
 
     def __mul__(self, other):
         """ Take dot product of two vectors. """
@@ -49,12 +53,13 @@ class Vector:
             # Will cause other.__rmul__(self) to be invoked
             return NotImplemented
 
-    def __truediv__(self, other):  # Scalar division
+    def __truediv__(self, other):
+        """ Scalar division. """
         return (1 / other) * self
 
-
     def __add__(self, other):
-        # assert self.D == other.D
+        """Add two vectors."""
+        assert self.D == other.D
         if isinstance(other, int):
             raise Exception("Cannot add number with vector.")
         return Vector(self.D, {i: self[i] + other[i] for i in self.D})
@@ -65,22 +70,27 @@ class Vector:
             return self
 
     def __sub__(a, b):
-        "Returns a vector which is the difference of a and b."
+        """Returns a vector representing the difference of vectors a and b."""
         return a + (-b)
 
     def __eq__(self, other):
-        assert self.D == other.D
+        """ Vector equality. """
+        if isinstance(other, Vector):
+            assert self.D == other.D
         return [self[e] for e in self.D] == [other[e] for e in other.D]
 
     def __pow__(self, exponent):
-        result = self
-        for _ in range(exponent):
-            result *= result
+        """ Vector exponentiation. """
+        result = self.copy()
+        for _ in range(exponent - 1):
+            for i in result.D:
+                result[i] = result[i] * result[i]
         return result
 
     def __iter__(self):
-        for i in self.f.values():
-            yield i
+        """ Loop over the elements of a Vector. """
+        for i in self.D:
+            yield self[i]
 
     def __str__(v):
         "pretty-printing"
