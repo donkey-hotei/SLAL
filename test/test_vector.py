@@ -107,9 +107,9 @@ class TestVectorClass(unittest.TestCase):
 
     def test_vector_eucldiean_length(self):
         """ Test length method. """
-        domain = function = range(1, 4)
-        v = Vector(domain, function)
-
+        domain = range(1, 4)
+        v = Vector(domain, [1, 1, 1])
+        self.assertEqual(round(v.length(), 1), 1.7)
 
 
 if __name__ == '__main__':
