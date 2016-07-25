@@ -91,6 +91,16 @@ class TestVectorClass(unittest.TestCase):
         res = Vector(domain, [0.5, 1.0, 1.5])
         self.assertEqual(v / c, res)
 
+    def test_sum_list_of_vectors(self):
+        """ Test __radd__ method. """
+        vector_list = []
+        for _ in range(10):
+            v = Vector(range(1, 11), [1 for _ in range(1, 11)])
+            vector_list += [v]
+
+        res = Vector(range(1, 11), [10 for _ in range(1, 11)])
+        self.assertEqual(sum(vector_list), res)
+
 
 if __name__ == '__main__':
     unittest.main()
